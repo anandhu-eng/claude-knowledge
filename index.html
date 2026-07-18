@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code — Slash Command Reference</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161d;
+    --surface2: #1a1e28;
+    --border: #242836;
+    --accent: #7c6af7;
+    --accent2: #4fc9a4;
+    --accent3: #f0a44a;
+    --text: #e2e6f0;
+    --muted: #6b7590;
+    --tag-bg: #1e2235;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  header {
+    padding: 48px 40px 32px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  h1 span {
+    color: var(--accent);
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  .version-badge {
+    margin-left: auto;
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    white-space: nowrap;
+  }
+
+  /* Layout */
+  .layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: calc(100vh - 120px);
+  }
+
+  /* Sidebar */
+  nav {
+    padding: 24px 0;
+    border-right: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  nav .nav-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    padding: 0 20px 8px;
+    margin-top: 16px;
+  }
+
+  nav a {
+    display: block;
+    padding: 7px 20px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+  }
+
+  nav a:hover, nav a.active {
+    color: var(--text);
+    border-left-color: var(--accent);
+    background: rgba(124, 106, 247, 0.06);
+  }
+
+  /* Content */
+  main {
+    padding: 32px 48px;
+    max-width: 900px;
+  }
+
+  section {
+    margin-bottom: 52px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  /* Command Cards */
+  .cmd-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cmd-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+    align-items: start;
+    transition: border-color 0.15s;
+  }
+
+  .cmd-card:hover {
+    border-color: rgba(124, 106, 247, 0.35);
+  }
+
+  .cmd-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    word-break: break-all;
+  }
+
+  .cmd-desc {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .cmd-desc strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .cmd-desc code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: var(--tag-bg);
+    color: var(--accent2);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+    letter-spacing: 0.04em;
+  }
+
+  .tag-new { background: rgba(79, 201, 164, 0.12); color: var(--accent2); border: 1px solid rgba(79, 201, 164, 0.25); }
+  .tag-pro { background: rgba(124, 106, 247, 0.12); color: var(--accent); border: 1px solid rgba(124, 106, 247, 0.25); }
+  .tag-agentic { background: rgba(240, 164, 74, 0.12); color: var(--accent3); border: 1px solid rgba(240, 164, 74, 0.25); }
+
+  /* Shortcut Table */
+  .shortcut-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .shortcut-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 16px;
+    padding: 10px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    align-items: center;
+  }
+
+  .shortcut-row:hover { border-color: var(--border); background: var(--surface2); }
+
+  kbd {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent3);
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    padding: 2px 7px;
+    display: inline-block;
+  }
+
+  .shortcut-desc {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* Prefix table */
+  .prefix-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+  }
+
+  .prefix-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .prefix-char {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .prefix-name {
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .prefix-example {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* Custom command block */
+  .code-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #a8b4d0;
+    line-height: 1.7;
+    white-space: pre;
+    overflow-x: auto;
+    margin-top: 12px;
+  }
+
+  .code-block .kw { color: var(--accent); }
+  .code-block .str { color: var(--accent2); }
+  .code-block .cm { color: var(--muted); }
+
+  /* Permission modes */
+  .mode-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mode-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 150px 1fr 140px;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .mode-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent3);
+  }
+
+  .mode-desc { color: var(--muted); font-size: 13px; }
+  .mode-use { color: var(--muted); font-size: 12px; font-style: italic; }
+
+  /* Tips banner */
+  .tip {
+    background: rgba(124, 106, 247, 0.07);
+    border: 1px solid rgba(124, 106, 247, 0.2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 16px;
+  }
+
+  .tip strong { color: var(--accent); }
+
+  @media (max-width: 700px) {
+    .layout { grid-template-columns: 1fr; }
+    nav { display: none; }
+    main { padding: 20px; }
+    .cmd-card, .mode-card { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">Claude Code · Reference</div>
+    <h1><span>/</span>Slash Command Reference</h1>
+    <div class="subtitle">All built-in commands, shortcuts, and prefixes — updated July 2026</div>
+  </div>
+  <div class="version-badge">v2.1.205+</div>
+</header>
+
+<div class="layout">
+  <nav>
+    <div class="nav-label">Sections</div>
+    <a href="#session">Session & Memory</a>
+    <a href="#model">Model & Effort</a>
+    <a href="#autonomous">Autonomous Work</a>
+    <a href="#code">Code Quality</a>
+    <a href="#parallel">Parallel & Agents</a>
+    <a href="#nav">Navigation</a>
+    <a href="#config">Config & Permissions</a>
+    <a href="#shortcuts">Keyboard Shortcuts</a>
+    <a href="#prefixes">Quick Prefixes</a>
+    <a href="#custom">Custom Commands</a>
+    <a href="#permissions">Permission Modes</a>
+  </nav>
+
+  <main>
+
+    <!-- SESSION -->
+    <section id="session">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(124,106,247,0.12)">💾</div>
+        <h2>Session & Memory</h2>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-card">
+          <div class="cmd-name">/init</div>
+          <div class="cmd-desc">Initialize project with <code>CLAUDE.md</code>. Creates your project's persistent instruction file read at every session start.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/memory</div>
+          <div class="cmd-desc">View and manage auto-memory files. Use <code>#</code> prefix in the REPL to add things to memory without editing files.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/resume</div>
+          <div class="cmd-desc">Resume a previous session. <code>/resume 1</code> for most recent, <code>/resume name</code> by name. Sessions are resumable up to 7 days.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/rename</div>
+          <div class="cmd-desc">Name the current session for easy resuming. Example: <code>/rename pr-review</code></div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/clear</div>
+          <div class="cmd-desc">Clear conversation history. Keeps files and memory intact — only the chat context is wiped.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/compact</div>
+          <div class="cmd-desc">Condense conversation history to free up context. Optionally focus: <code>/compact focus on tests</code></div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/context</div>
+          <div class="cmd-desc">View context window usage with actionable suggestions on when to compact.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/export</div>
+          <div class="cmd-desc">Export the conversation transcript to a file.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/rewind</div>
+          <div class="cmd-desc">Return to a prior checkpoint. Also triggered by pressing <kbd>Esc Esc</kbd>.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/branch</div>
+          <div class="cmd-desc">Branch the conversation for parallel exploration without affecting your main session.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODEL -->
+    <section id="model">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(79,201,164,0.12)">⚡</div>
+        <h2>Model & Effort</h2>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-card">
+          <div class="cmd-name">/model</div>
+          <div class="cmd-desc">Switch model mid-session. Options: <code>/model sonnet</code> (default, Sonnet 5), <code>/model opus</code> (Opus 4.8), <code>/model haiku</code>, <code>/model fable</code>. Also <kbd>Alt+P</kbd> while typing.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/effort</div>
+          <div class="cmd-desc">Set reasoning effort: <code>low</code>, <code>medium</code>, <code>high</code>, <code>xhigh</code>. Use <code>/effort xhigh</code> with Opus for hardest agentic work.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/fast</div>
+          <div class="cmd-desc">Toggle fast output mode for quicker, lighter responses.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/usage</div>
+          <div class="cmd-desc">View token usage, cost, and plan limits. <code>/cost</code> and <code>/stats</code> are shortcuts that open specific tabs here.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/status</div>
+          <div class="cmd-desc">View current session state: active model, permission mode, and settings summary.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AUTONOMOUS -->
+    <section id="autonomous">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(240,164,74,0.12)">🔁</div>
+        <h2>Autonomous Work</h2>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-card">
+          <div class="cmd-name">/loop <span class="tag tag-agentic">agentic</span></div>
+          <div class="cmd-desc">Run a prompt or command on a repeating interval. <code>/loop 3h check PRs</code>, <code>/loop 5m /my-skill</code>, or bare <code>/loop</code> for self-paced maintenance. Stop with <code>/loop stop</code> or <kbd>Ctrl+C</kbd>.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/goal <span class="tag tag-new">v2.1.139+</span></div>
+          <div class="cmd-desc">Set a completion condition; Claude keeps going autonomously until the condition is met. Example: <code>/goal all tests pass</code>. Uses a fast model to evaluate after each turn.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/plan</div>
+          <div class="cmd-desc">Enter plan mode — Claude outlines the approach before touching any files. Best before large refactors. <code>/plan fix the auth module</code></div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/batch</div>
+          <div class="cmd-desc">Run batch operations across multiple files or targets in parallel.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/tasks</div>
+          <div class="cmd-desc">List all background agents currently running in this session.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/bashes</div>
+          <div class="cmd-desc">List background bash tasks spawned by Claude.</div>
+        </div>
+      </div>
+      <div class="tip">
+        <strong>Tip:</strong> <code>/loop</code> vs <code>/goal</code> — use <code>/loop</code> when you want Claude to wake up on a <em>schedule</em>. Use <code>/goal</code> when you want Claude to keep working until a <em>condition</em> is true.
+      </div>
+    </section>
+
+    <!-- CODE QUALITY -->
+    <section id="code">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(124,106,247,0.12)">🔍</div>
+        <h2>Code Quality</h2>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-card">
+          <div class="cmd-name">/code-review</div>
+          <div class="cmd-desc">Find correctness bugs. Supports effort levels: <code>/code-review medium</code>, <code>/code-review ultra</code>. Use <code>--fix</code> to auto-apply fixes, <code>--comment</code> to post inline GitHub PR comments.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/security-review</div>
+          <div class="cmd-desc">Review code specifically for security vulnerabilities — OWASP Top 10, secrets, injection risks.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/claude-api</div>
+          <div class="cmd-desc">Get help building apps with the Anthropic SDK — tool use, batch processing, MCP integration, streaming.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARALLEL & AGENTS -->
+    <section id="parallel">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(79,201,164,0.12)">🤖</div>
+        <h2>Parallel & Agents</h2>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-card">
+          <div class="cmd-name">/agents</div>
+          <div class="cmd-desc">Open Agent View — an operations screen for running, blocked, and completed Claude Code sessions. Up to 10 subagents can run in parallel.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/skills</div>
+          <div class="cmd-desc">List installed skills with a type-to-filter search box. Skills are prompt-based commands stored in <code>.claude/skills/</code>.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/add-dir</div>
+          <div class="cmd-desc">Expand file access by adding additional working directories to the session.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAVIGATION -->
+    <section id="nav">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(240,164,74,0.12)">🧭</div>
+        <h2>Navigation & UI</h2>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-card">
+          <div class="cmd-name">/copy</div>
+          <div class="cmd-desc">Copy the latest code block. <code>/copy N</code> for the Nth-latest response.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/voice</div>
+          <div class="cmd-desc">Toggle push-to-talk voice input mode.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/theme</div>
+          <div class="cmd-desc">Manage named themes. Plugins can ship a <code>themes/</code> directory with custom options.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/color</div>
+          <div class="cmd-desc">Set the prompt-bar color. <code>/color default</code> to reset.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/powerup</div>
+          <div class="cmd-desc">Interactive feature lessons with animated demos — good for discovering lesser-known Claude Code capabilities.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/release-notes</div>
+          <div class="cmd-desc">Interactive version picker with full changelogs.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/buddy</div>
+          <div class="cmd-desc">Terminal companion pet — 18 species, 5 rarity tiers, deterministic from your account ID.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONFIG -->
+    <section id="config">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(124,106,247,0.12)">⚙️</div>
+        <h2>Config & Permissions</h2>
+      </div>
+      <div class="cmd-grid">
+        <div class="cmd-card">
+          <div class="cmd-name">/config</div>
+          <div class="cmd-desc">Open the full settings interface interactively.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/permissions</div>
+          <div class="cmd-desc">Manage permission settings interactively — what Claude can read, edit, and execute.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/hooks</div>
+          <div class="cmd-desc">View current hook configuration. Hooks fire on events like <code>PreToolUse</code>, <code>PostToolUse</code>, <code>Stop</code>, etc.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/mcp</div>
+          <div class="cmd-desc">Configure MCP servers. <code>/mcp enable</code>, <code>/mcp disable</code>. MCP expands Claude's tool access to external services.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/doctor</div>
+          <div class="cmd-desc">Full setup checkup — diagnoses and fixes environment issues. Alias: <code>/checkup</code></div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/bug</div>
+          <div class="cmd-desc">Report a bug directly to Anthropic from within your session.</div>
+        </div>
+        <div class="cmd-card">
+          <div class="cmd-name">/login / /logout</div>
+          <div class="cmd-desc">Authenticate or sign out mid-session without restarting Claude Code.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEYBOARD SHORTCUTS -->
+    <section id="shortcuts">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(79,201,164,0.12)">⌨️</div>
+        <h2>Keyboard Shortcuts</h2>
+      </div>
+      <div class="shortcut-grid">
+        <div class="shortcut-row"><span><kbd>Ctrl+C</kbd></span><span class="shortcut-desc">Cancel current operation</span></div>
+        <div class="shortcut-row"><span><kbd>Ctrl+D</kbd></span><span class="shortcut-desc">Exit session (EOF)</span></div>
+        <div class="shortcut-row"><span><kbd>Ctrl+L</kbd></span><span class="shortcut-desc">Clear screen (keeps history)</span></div>
+        <div class="shortcut-row"><span><kbd>Ctrl+B</kbd></span><span class="shortcut-desc">Background current operation</span></div>
+        <div class="shortcut-row"><span><kbd>Ctrl+X Ctrl+K</kbd></span><span class="shortcut-desc">Stop all agents</span></div>
+        <div class="shortcut-row"><span><kbd>Ctrl+S</kbd></span><span class="shortcut-desc">Stash prompt draft</span></div>
+        <div class="shortcut-row"><span><kbd>Ctrl+G</kbd></span><span class="shortcut-desc">Open external editor</span></div>
+        <div class="shortcut-row"><span><kbd>Ctrl+V</kbd></span><span class="shortcut-desc">Paste image from clipboard</span></div>
+        <div class="shortcut-row"><span><kbd>Ctrl+O</kbd></span><span class="shortcut-desc">Toggle verbose output</span></div>
+        <div class="shortcut-row"><span><kbd>Ctrl+R</kbd></span><span class="shortcut-desc">Search command history</span></div>
+        <div class="shortcut-row"><span><kbd>Esc Esc</kbd></span><span class="shortcut-desc">Rewind last change</span></div>
+        <div class="shortcut-row"><span><kbd>Shift+Tab</kbd></span><span class="shortcut-desc">Cycle permission modes</span></div>
+        <div class="shortcut-row"><span><kbd>Alt+P</kbd></span><span class="shortcut-desc">Switch models while typing</span></div>
+        <div class="shortcut-row"><span><kbd>Alt+T</kbd></span><span class="shortcut-desc">Toggle thinking mode</span></div>
+        <div class="shortcut-row"><span><kbd>Tab</kbd></span><span class="shortcut-desc">Accept prompt suggestion</span></div>
+        <div class="shortcut-row"><span><kbd>! Tab</kbd></span><span class="shortcut-desc">Bash history autocomplete</span></div>
+        <div class="shortcut-row"><span><kbd>?</kbd></span><span class="shortcut-desc">Show all shortcuts</span></div>
+      </div>
+    </section>
+
+    <!-- PREFIXES -->
+    <section id="prefixes">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(240,164,74,0.12)">⌨️</div>
+        <h2>Quick Prefixes</h2>
+      </div>
+      <div class="prefix-grid">
+        <div class="prefix-card">
+          <div class="prefix-char">#</div>
+          <div class="prefix-name">Persistent Memory</div>
+          <div class="prefix-example"># Always use TypeScript</div>
+        </div>
+        <div class="prefix-card">
+          <div class="prefix-char">/</div>
+          <div class="prefix-name">Slash Command</div>
+          <div class="prefix-example">/code-review --fix</div>
+        </div>
+        <div class="prefix-card">
+          <div class="prefix-char">!</div>
+          <div class="prefix-name">Execute Bash</div>
+          <div class="prefix-example">! git status</div>
+        </div>
+        <div class="prefix-card">
+          <div class="prefix-char">@</div>
+          <div class="prefix-name">Reference File</div>
+          <div class="prefix-example">@src/index.ts</div>
+        </div>
+        <div class="prefix-card">
+          <div class="prefix-char">&</div>
+          <div class="prefix-name">Send to Cloud</div>
+          <div class="prefix-example">& Build the API</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CUSTOM COMMANDS -->
+    <section id="custom">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(124,106,247,0.12)">🛠</div>
+        <h2>Custom Commands</h2>
+      </div>
+      <div class="cmd-desc" style="margin-bottom:12px">Create a <code>.md</code> file in <code>.claude/commands/</code> (project) or <code>~/.claude/commands/</code> (personal) and invoke it with <code>/filename</code>. Use <code>$ARGUMENTS</code> for arguments.</div>
+<div class="code-block"><span class="cm">--- # .claude/commands/pr-review.md</span>
+<span class="kw">description:</span> <span class="str">Review open PRs and post GitHub comments</span>
+<span class="kw">allowed-tools:</span> <span class="str">Bash(gh pr list *), Bash(gh pr diff *), Bash(gh pr review *)</span>
+<span class="kw">model:</span> <span class="str">opus</span>
+---
+
+1. Run `gh pr list --state open --json number,title`
+2. For each PR, run `gh pr diff &lt;number&gt;`
+3. Review for: breaking API changes, missing error handling, security issues
+4. Post: `gh pr review &lt;number&gt; --comment -b "&lt;feedback&gt;"`</div>
+      <div class="tip" style="margin-top:12px"><strong>Usage:</strong> <code>/pr-review</code> — or schedule it: <code>/loop 3h /pr-review</code></div>
+    </section>
+
+    <!-- PERMISSION MODES -->
+    <section id="permissions">
+      <div class="section-header">
+        <div class="section-icon" style="background:rgba(240,164,74,0.12)">🔐</div>
+        <h2>Permission Modes</h2>
+      </div>
+      <div class="mode-grid">
+        <div class="mode-card">
+          <div class="mode-name">manual (default)</div>
+          <div class="mode-desc">Prompts on first use of each tool</div>
+          <div class="mode-use">Normal development</div>
+        </div>
+        <div class="mode-card">
+          <div class="mode-name">acceptEdits</div>
+          <div class="mode-desc">Auto-approves file edits, prompts for bash</div>
+          <div class="mode-use">Trusted projects</div>
+        </div>
+        <div class="mode-card">
+          <div class="mode-name">auto</div>
+          <div class="mode-desc">Safety classifier reviews each action automatically</div>
+          <div class="mode-use">Autonomous with guardrails</div>
+        </div>
+        <div class="mode-card">
+          <div class="mode-name">plan</div>
+          <div class="mode-desc">Read-only — no edits or execution</div>
+          <div class="mode-use">Analysis only</div>
+        </div>
+        <div class="mode-card">
+          <div class="mode-name">bypassPermissions</div>
+          <div class="mode-desc">Skips all prompts entirely</div>
+          <div class="mode-use">CI/CD automation</div>
+        </div>
+      </div>
+      <div class="tip">
+        Cycle modes with <kbd>Shift+Tab</kbd>. Set at startup: <code>claude --permission-mode auto</code>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+</body>
+</html>
