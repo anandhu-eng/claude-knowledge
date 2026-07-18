@@ -57,9 +57,7 @@
     color: var(--text);
   }
 
-  h1 span {
-    color: var(--accent);
-  }
+  h1 span { color: var(--accent); }
 
   .subtitle {
     color: var(--muted);
@@ -124,12 +122,10 @@
   /* Content */
   main {
     padding: 32px 48px;
-    max-width: 900px;
+    max-width: 960px;
   }
 
-  section {
-    margin-bottom: 52px;
-  }
+  section { margin-bottom: 52px; }
 
   .section-header {
     display: flex;
@@ -162,7 +158,7 @@
   .cmd-grid {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
 
   .cmd-card {
@@ -172,14 +168,12 @@
     padding: 14px 18px;
     display: grid;
     grid-template-columns: 200px 1fr;
-    gap: 16px;
+    gap: 12px 16px;
     align-items: start;
     transition: border-color 0.15s;
   }
 
-  .cmd-card:hover {
-    border-color: rgba(124, 106, 247, 0.35);
-  }
+  .cmd-card:hover { border-color: rgba(124, 106, 247, 0.35); }
 
   .cmd-name {
     font-family: 'JetBrains Mono', monospace;
@@ -195,18 +189,68 @@
     line-height: 1.5;
   }
 
-  .cmd-desc strong {
-    color: var(--text);
-    font-weight: 500;
-  }
+  .cmd-desc strong { color: var(--text); font-weight: 500; }
 
-  .cmd-desc code {
+  .cmd-desc code, code {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     background: var(--tag-bg);
     color: var(--accent2);
     padding: 1px 6px;
     border-radius: 4px;
+  }
+
+  /* Example / Output section */
+  .cmd-io {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 2px;
+  }
+
+  .io-block {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 13px;
+    overflow: hidden;
+  }
+
+  .io-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 7px;
+  }
+
+  .io-block.io-example .io-label { color: var(--accent2); }
+  .io-block.io-output  .io-label { color: var(--accent3); }
+
+  .io-cmd {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent2);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .io-cmd::before {
+    content: '> ';
+    color: var(--muted);
+  }
+
+  .io-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #8a9ab5;
+    line-height: 1.65;
+    white-space: pre;
+    overflow-x: auto;
   }
 
   /* Tags */
@@ -221,9 +265,9 @@
     letter-spacing: 0.04em;
   }
 
-  .tag-new { background: rgba(79, 201, 164, 0.12); color: var(--accent2); border: 1px solid rgba(79, 201, 164, 0.25); }
-  .tag-pro { background: rgba(124, 106, 247, 0.12); color: var(--accent); border: 1px solid rgba(124, 106, 247, 0.25); }
-  .tag-agentic { background: rgba(240, 164, 74, 0.12); color: var(--accent3); border: 1px solid rgba(240, 164, 74, 0.25); }
+  .tag-new { background: rgba(79,201,164,0.12); color: var(--accent2); border: 1px solid rgba(79,201,164,0.25); }
+  .tag-pro { background: rgba(124,106,247,0.12); color: var(--accent); border: 1px solid rgba(124,106,247,0.25); }
+  .tag-agentic { background: rgba(240,164,74,0.12); color: var(--accent3); border: 1px solid rgba(240,164,74,0.25); }
 
   /* Shortcut Table */
   .shortcut-grid {
@@ -258,12 +302,9 @@
     display: inline-block;
   }
 
-  .shortcut-desc {
-    color: var(--muted);
-    font-size: 13px;
-  }
+  .shortcut-desc { color: var(--muted); font-size: 13px; }
 
-  /* Prefix table */
+  /* Prefix grid */
   .prefix-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -330,7 +371,7 @@
     border-radius: 8px;
     padding: 14px 18px;
     display: grid;
-    grid-template-columns: 150px 1fr 140px;
+    grid-template-columns: 160px 1fr 140px;
     gap: 16px;
     align-items: center;
   }
@@ -342,12 +383,12 @@
   }
 
   .mode-desc { color: var(--muted); font-size: 13px; }
-  .mode-use { color: var(--muted); font-size: 12px; font-style: italic; }
+  .mode-use  { color: var(--muted); font-size: 12px; font-style: italic; }
 
   /* Tips banner */
   .tip {
-    background: rgba(124, 106, 247, 0.07);
-    border: 1px solid rgba(124, 106, 247, 0.2);
+    background: rgba(124,106,247,0.07);
+    border: 1px solid rgba(124,106,247,0.2);
     border-radius: 8px;
     padding: 14px 18px;
     font-size: 13px;
@@ -357,11 +398,13 @@
 
   .tip strong { color: var(--accent); }
 
-  @media (max-width: 700px) {
+  @media (max-width: 800px) {
     .layout { grid-template-columns: 1fr; }
     nav { display: none; }
     main { padding: 20px; }
-    .cmd-card, .mode-card { grid-template-columns: 1fr; }
+    .cmd-card { grid-template-columns: 1fr; }
+    .cmd-io   { grid-template-columns: 1fr; }
+    .mode-card { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -371,7 +414,7 @@
   <div>
     <div class="logo">Claude Code · Reference</div>
     <h1><span>/</span>Slash Command Reference</h1>
-    <div class="subtitle">All built-in commands, shortcuts, and prefixes — updated July 2026</div>
+    <div class="subtitle">All built-in commands, shortcuts, and prefixes — with examples and outputs · July 2026</div>
   </div>
   <div class="version-badge">v2.1.205+</div>
 </header>
@@ -401,46 +444,183 @@
         <h2>Session & Memory</h2>
       </div>
       <div class="cmd-grid">
+
         <div class="cmd-card">
           <div class="cmd-name">/init</div>
           <div class="cmd-desc">Initialize project with <code>CLAUDE.md</code>. Creates your project's persistent instruction file read at every session start.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/init</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">✓ CLAUDE.md created (18 lines)
+Detected: Node.js · TypeScript · Jest
+Added: project structure, test cmds, style notes
+Claude will read this at every session start.</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/memory</div>
           <div class="cmd-desc">View and manage auto-memory files. Use <code>#</code> prefix in the REPL to add things to memory without editing files.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/memory</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Memory: ~/.claude/projects/.../memory/
+  user_role.md        senior fullstack dev
+  feedback_testing.md run tests before commit
+  project_context.md  auth refactor (compliance)
+[E]dit  [D]elete  [N]ew</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/resume</div>
           <div class="cmd-desc">Resume a previous session. <code>/resume 1</code> for most recent, <code>/resume name</code> by name. Sessions are resumable up to 7 days.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/resume auth-refactor</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Resuming: "auth-refactor" (2h ago · 34 msgs)
+Last action: edited src/auth/middleware.ts
+Context restored. Continue where you left off.</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/rename</div>
-          <div class="cmd-desc">Name the current session for easy resuming. Example: <code>/rename pr-review</code></div>
+          <div class="cmd-desc">Name the current session for easy resuming later.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/rename auth-refactor</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Session renamed → "auth-refactor"
+Resume later with: /resume auth-refactor</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/clear</div>
           <div class="cmd-desc">Clear conversation history. Keeps files and memory intact — only the chat context is wiped.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/clear</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Conversation cleared (47 messages removed).
+Files, memory, and tool state are intact.</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/compact</div>
           <div class="cmd-desc">Condense conversation history to free up context. Optionally focus: <code>/compact focus on tests</code></div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/compact focus on the failing tests</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Compacted: 112 messages → 14 (87% reduction)
+Summary anchored on: test failures in auth.test.ts
+Context freed: ~82k tokens</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/context</div>
           <div class="cmd-desc">View context window usage with actionable suggestions on when to compact.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/context</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Context window: ██████████░░░░░░░ 58%
+Used: 116,842 / 200,000 tokens
+  System + tools:  18k
+  Conversation:    74k
+  Files in scope:  24k
+⚡ Suggestion: /compact when above 75%</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/export</div>
           <div class="cmd-desc">Export the conversation transcript to a file.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/export</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">✓ Transcript exported
+  File: claude-session-2026-07-18-14-32.md
+  Messages: 47  ·  Code blocks: 12</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/rewind</div>
           <div class="cmd-desc">Return to a prior checkpoint. Also triggered by pressing <kbd>Esc Esc</kbd>.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/rewind</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Reverted to checkpoint before last response.
+3 file edits undone:
+  src/auth/middleware.ts
+  src/auth/types.ts
+  tests/auth.test.ts</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/branch</div>
           <div class="cmd-desc">Branch the conversation for parallel exploration without affecting your main session.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/branch</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Branched from turn 23.  Branch ID: br_a4f2c9
+Explore freely — main session is unaffected.
+Merge back or discard when done.</div>
+            </div>
+          </div>
         </div>
+
       </div>
     </section>
 
@@ -451,26 +631,97 @@
         <h2>Model & Effort</h2>
       </div>
       <div class="cmd-grid">
+
         <div class="cmd-card">
           <div class="cmd-name">/model</div>
-          <div class="cmd-desc">Switch model mid-session. Options: <code>/model sonnet</code> (default, Sonnet 5), <code>/model opus</code> (Opus 4.8), <code>/model haiku</code>, <code>/model fable</code>. Also <kbd>Alt+P</kbd> while typing.</div>
+          <div class="cmd-desc">Switch model mid-session. Options: <code>sonnet</code> (default), <code>opus</code>, <code>haiku</code>, <code>fable</code>. Also <kbd>Alt+P</kbd> while typing.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/model opus</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Model → claude-opus-4-8
+Effort: medium
+Best for: complex reasoning, agentic tasks</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/effort</div>
-          <div class="cmd-desc">Set reasoning effort: <code>low</code>, <code>medium</code>, <code>high</code>, <code>xhigh</code>. Use <code>/effort xhigh</code> with Opus for hardest agentic work.</div>
+          <div class="cmd-desc">Set reasoning effort: <code>low</code>, <code>medium</code>, <code>high</code>, <code>xhigh</code>. Use <code>xhigh</code> with Opus for hardest agentic work.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/effort xhigh</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Effort → xhigh
+Claude will reason more deeply before responding.
+Recommended pairing: /model opus</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/fast</div>
-          <div class="cmd-desc">Toggle fast output mode for quicker, lighter responses.</div>
+          <div class="cmd-desc">Toggle fast output mode — uses Opus with optimized output speed.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/fast</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Fast mode ON
+Using Opus 4.8 with optimized output speed.
+Toggle off: /fast</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/usage</div>
           <div class="cmd-desc">View token usage, cost, and plan limits. <code>/cost</code> and <code>/stats</code> are shortcuts that open specific tabs here.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/usage</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Session usage
+  Input tokens:   142,330
+  Output tokens:   18,440
+  Cache hits:      89,200  (63%)
+  Estimated cost: $0.38
+Plan: Pro  ·  Resets: Aug 1</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/status</div>
           <div class="cmd-desc">View current session state: active model, permission mode, and settings summary.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/status</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Model:       claude-sonnet-4-6
+Mode:        acceptEdits
+Effort:      medium  ·  Fast: off
+Session:     "auth-refactor" (2h 14m)
+Working dir: /Users/me/my-project</div>
+            </div>
+          </div>
         </div>
+
       </div>
     </section>
 
@@ -481,30 +732,125 @@
         <h2>Autonomous Work</h2>
       </div>
       <div class="cmd-grid">
+
         <div class="cmd-card">
           <div class="cmd-name">/loop <span class="tag tag-agentic">agentic</span></div>
-          <div class="cmd-desc">Run a prompt or command on a repeating interval. <code>/loop 3h check PRs</code>, <code>/loop 5m /my-skill</code>, or bare <code>/loop</code> for self-paced maintenance. Stop with <code>/loop stop</code> or <kbd>Ctrl+C</kbd>.</div>
+          <div class="cmd-desc">Run a prompt or command on a repeating interval. <code>/loop 3h check PRs</code>, <code>/loop 5m /my-skill</code>, or bare <code>/loop</code> for self-paced maintenance. Stop with <code>/loop stop</code>.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/loop 5m check for new failing tests</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Loop started ↺
+  Interval:  every 5 minutes
+  Task:      check for new failing tests
+  Wakeup #1: 14:47
+Stop with: /loop stop  or  Ctrl+C</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/goal <span class="tag tag-new">v2.1.139+</span></div>
-          <div class="cmd-desc">Set a completion condition; Claude keeps going autonomously until the condition is met. Example: <code>/goal all tests pass</code>. Uses a fast model to evaluate after each turn.</div>
+          <div class="cmd-desc">Set a completion condition; Claude keeps going autonomously until the condition is met. Uses a fast model to evaluate after each turn.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/goal all tests pass</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Goal set: "all tests pass"
+Running autonomously...
+  ✗ Turn 1: 3 tests failing in auth.test.ts
+  → Fixing middleware null check...
+  ✓ Turn 2: All 47 tests passing
+Goal reached in 2 turns. Stopping.</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/plan</div>
-          <div class="cmd-desc">Enter plan mode — Claude outlines the approach before touching any files. Best before large refactors. <code>/plan fix the auth module</code></div>
+          <div class="cmd-desc">Enter plan mode — Claude outlines the approach before touching any files. Best before large refactors.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/plan refactor the auth module</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Plan: Refactor auth module
+Phase 1 — Audit (read-only)
+  • Read src/auth/*.ts (6 files)
+  • Identify session token issues
+Phase 2 — Restructure
+  • Split middleware.ts → validator + session
+  • Update imports in 4 consumers
+Phase 3 — Test: jest --testPathPattern=auth
+Approve to begin → [Y/n]</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/batch</div>
           <div class="cmd-desc">Run batch operations across multiple files or targets in parallel.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/batch add JSDoc to all files in src/utils/</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Batch: 8 files in src/utils/
+  ✓ formatDate.ts   — 3 functions documented
+  ✓ validators.ts   — 7 functions documented
+  ✓ http.ts         — 4 functions documented
+  ... (5 more)
+Completed in 12s · 0 errors</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/tasks</div>
           <div class="cmd-desc">List all background agents currently running in this session.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/tasks</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Background agents (2 running)
+  [1] ● pr-reviewer    Running  1m 34s
+  [2] ● test-watcher   Running  4m 02s
+/tasks stop 1  to stop agent #1</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/bashes</div>
           <div class="cmd-desc">List background bash tasks spawned by Claude.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/bashes</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Background bash tasks (1 running)
+  [1] ● npm run build  Running  0m 48s  PID 83421
+Output: /tasks output 1
+Stop:   /tasks stop 1</div>
+            </div>
+          </div>
         </div>
+
       </div>
       <div class="tip">
         <strong>Tip:</strong> <code>/loop</code> vs <code>/goal</code> — use <code>/loop</code> when you want Claude to wake up on a <em>schedule</em>. Use <code>/goal</code> when you want Claude to keep working until a <em>condition</em> is true.
@@ -518,18 +864,67 @@
         <h2>Code Quality</h2>
       </div>
       <div class="cmd-grid">
+
         <div class="cmd-card">
           <div class="cmd-name">/code-review</div>
-          <div class="cmd-desc">Find correctness bugs. Supports effort levels: <code>/code-review medium</code>, <code>/code-review ultra</code>. Use <code>--fix</code> to auto-apply fixes, <code>--comment</code> to post inline GitHub PR comments.</div>
+          <div class="cmd-desc">Find correctness bugs. Supports effort levels: <code>/code-review medium</code>, <code>/code-review ultra</code>. Use <code>--fix</code> to auto-apply, <code>--comment</code> to post inline GitHub PR comments.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/code-review --fix</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Reviewing diff (14 files, +342/-89 lines)...
+  ● HIGH  src/api/users.ts:42   SQL injection via userId
+  ● MED   src/auth/session.ts:18 Missing null check
+  ○ LOW   src/utils/format.ts:7  Unnecessary re-render
+Applying 2 fixes (HIGH + MED)...
+✓ Fixed. Review LOW finding manually.</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/security-review</div>
-          <div class="cmd-desc">Review code specifically for security vulnerabilities — OWASP Top 10, secrets, injection risks.</div>
+          <div class="cmd-desc">Review code specifically for security vulnerabilities — OWASP Top 10, secrets in code, injection risks.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/security-review</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Security review: 23 files on current branch
+  CRITICAL  src/api/upload.ts:31  Path traversal
+  HIGH      src/auth/tokens.ts:14 Token in localStorage
+  HIGH      .env.example          Real API key — rotate!
+  LOW       src/utils/log.ts:8    Email in plaintext logs
+4 findings · 1 critical · 2 high · 1 low</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/claude-api</div>
-          <div class="cmd-desc">Get help building apps with the Anthropic SDK — tool use, batch processing, MCP integration, streaming.</div>
+          <div class="cmd-desc">Get help building apps with the Anthropic SDK — tool use, batch processing, MCP integration, streaming, prompt caching.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/claude-api</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Claude API Reference loaded. Ask me about:
+  • Model IDs, pricing, rate limits
+  • Tool use / function calling
+  • Streaming responses
+  • MCP server setup &amp; tool definitions
+  • Batch API &amp; prompt caching</div>
+            </div>
+          </div>
         </div>
+
       </div>
     </section>
 
@@ -540,18 +935,64 @@
         <h2>Parallel & Agents</h2>
       </div>
       <div class="cmd-grid">
+
         <div class="cmd-card">
           <div class="cmd-name">/agents</div>
           <div class="cmd-desc">Open Agent View — an operations screen for running, blocked, and completed Claude Code sessions. Up to 10 subagents can run in parallel.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/agents</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Agent View ─────────────────────────
+  [1] ● pr-reviewer    Running   2m 11s
+  [2] ● test-watcher   Running   8m 03s
+  [3] ○ docs-builder   Complete  --
+[S]top  [V]iew output  [N]ew agent</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/skills</div>
           <div class="cmd-desc">List installed skills with a type-to-filter search box. Skills are prompt-based commands stored in <code>.claude/skills/</code>.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/skills</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Installed skills (6)
+  /deep-research    Multi-source cited research report
+  /code-review      Review diff at configurable effort
+  /security-review  OWASP-focused security audit
+  /run              Launch and test the app live
+  /verify           Verify a change works in the app
+  /pr-review        Review open PRs  [custom]</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/add-dir</div>
           <div class="cmd-desc">Expand file access by adding additional working directories to the session.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/add-dir ../shared-utils</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">✓ Added to session scope:
+  /Users/me/shared-utils  (47 files · 12.3k lines)
+Claude can now read and edit files here.</div>
+            </div>
+          </div>
         </div>
+
       </div>
     </section>
 
@@ -562,34 +1003,135 @@
         <h2>Navigation & UI</h2>
       </div>
       <div class="cmd-grid">
+
         <div class="cmd-card">
           <div class="cmd-name">/copy</div>
-          <div class="cmd-desc">Copy the latest code block. <code>/copy N</code> for the Nth-latest response.</div>
+          <div class="cmd-desc">Copy the latest code block to clipboard. <code>/copy N</code> for the Nth-latest response.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/copy</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">✓ Copied last code block to clipboard.
+  (42 lines · TypeScript)
+/copy 2  to copy second-latest</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/voice</div>
           <div class="cmd-desc">Toggle push-to-talk voice input mode.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/voice</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Voice input ON
+Hold Space to speak, release to send.
+Transcription: Whisper (local)
+Toggle off: /voice</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/theme</div>
           <div class="cmd-desc">Manage named themes. Plugins can ship a <code>themes/</code> directory with custom options.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/theme dark</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Theme → "dark"
+Available: default, dark, light, monokai, solarized
+/theme list  to see all installed themes</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/color</div>
           <div class="cmd-desc">Set the prompt-bar color. <code>/color default</code> to reset.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/color purple</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Prompt color → purple
+/color default  to reset to theme default</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/powerup</div>
           <div class="cmd-desc">Interactive feature lessons with animated demos — good for discovering lesser-known Claude Code capabilities.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/powerup</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">✦ Claude Code Power-Ups ─────────────
+  1. Multi-file editing with @-references
+  2. Parallel agent workflows
+  3. Hooks for automated pre/post actions
+  4. Custom slash commands
+  5. MCP server integrations
+→ Arrow keys to explore · Enter to demo</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/release-notes</div>
           <div class="cmd-desc">Interactive version picker with full changelogs.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/release-notes</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Release Notes ──────────────────────
+▸ v2.1.205  Jul 15  /goal command, agent budgets
+  v2.1.139  Jun 28  /branch, voice input
+  v2.1.100  Jun 10  Workflow engine, pipeline()
+  v2.0.0    May 01  Claude 4 models, fast mode
+Select version to read full changelog →</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/buddy</div>
           <div class="cmd-desc">Terminal companion pet — 18 species, 5 rarity tiers, deterministic from your account ID.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/buddy</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">  /\_/\
+ ( o.o )  ← Mochi the Snow Rabbit
+  &gt; ^ &lt;   Rarity: Rare ✦✦✦
+           Account seed: anandhu-eng
+Companion active. Good luck!</div>
+            </div>
+          </div>
         </div>
+
       </div>
     </section>
 
@@ -600,34 +1142,149 @@
         <h2>Config & Permissions</h2>
       </div>
       <div class="cmd-grid">
+
         <div class="cmd-card">
           <div class="cmd-name">/config</div>
           <div class="cmd-desc">Open the full settings interface interactively.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/config</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Settings ────────────────────────────
+  Model       claude-sonnet-4-6
+  Effort      medium
+  Theme       dark
+  Permission  acceptEdits
+  Auto-memory enabled
+  Hooks       3 configured
+  MCP servers 2 active
+[Tab] navigate  [Enter] edit  [Q] quit</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/permissions</div>
           <div class="cmd-desc">Manage permission settings interactively — what Claude can read, edit, and execute.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/permissions</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Permissions ────────────────────────
+  ✓ Read files       all paths
+  ✓ Edit files       all paths
+  ✓ Bash: git *      allowed
+  ✓ Bash: npm test   allowed
+  ✗ Bash: rm -rf     blocked
+[A]dd  [R]emove  [M]ode  [Q]uit</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/hooks</div>
           <div class="cmd-desc">View current hook configuration. Hooks fire on events like <code>PreToolUse</code>, <code>PostToolUse</code>, <code>Stop</code>, etc.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/hooks</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Hooks (3 configured)
+  PreToolUse   → lint check before file edits
+  PostToolUse  → run tests after Bash(git commit *)
+  Stop         → notify Slack #dev-alerts
+Source: .claude/settings.json</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/mcp</div>
           <div class="cmd-desc">Configure MCP servers. <code>/mcp enable</code>, <code>/mcp disable</code>. MCP expands Claude's tool access to external services.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/mcp enable github</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">MCP server "github" enabled.
+  Tools added: list_repos, create_pr,
+               get_issue (+12 more)
+  Auth: OAuth (already connected)
+Active MCP servers: github, slack</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/doctor</div>
           <div class="cmd-desc">Full setup checkup — diagnoses and fixes environment issues. Alias: <code>/checkup</code></div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/doctor</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Claude Code Health Check ───────────
+  ✓ CLI version   2.1.205 (latest)
+  ✓ Node.js       v20.11.0
+  ✓ Auth          logged in (anandhu-eng)
+  ✓ Git           2.43.0
+  ✗ MCP: jira     unreachable (timeout)
+  ✓ CLAUDE.md     found (18 lines)
+1 warning · fix: /mcp disable jira</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
           <div class="cmd-name">/bug</div>
           <div class="cmd-desc">Report a bug directly to Anthropic from within your session.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/bug</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Report a bug to Anthropic
+  Session ID: sess_7f3a2b
+  Version:    2.1.205
+Describe the issue:
+&gt; _
+[Submit]  [Attach transcript]  [Cancel]</div>
+            </div>
+          </div>
         </div>
+
         <div class="cmd-card">
-          <div class="cmd-name">/login / /logout</div>
+          <div class="cmd-name">/login &amp; /logout</div>
           <div class="cmd-desc">Authenticate or sign out mid-session without restarting Claude Code.</div>
+          <div class="cmd-io">
+            <div class="io-block io-example">
+              <div class="io-label">▸ example</div>
+              <div class="io-cmd">/logout</div>
+            </div>
+            <div class="io-block io-output">
+              <div class="io-label">◈ output</div>
+              <div class="io-text">Signed out of claude.ai (anandhu-eng).
+Token cleared from keyring.
+Sign back in:  /login
+Or restart:    claude --login</div>
+            </div>
+          </div>
         </div>
+
       </div>
     </section>
 
@@ -686,9 +1343,9 @@
           <div class="prefix-example">@src/index.ts</div>
         </div>
         <div class="prefix-card">
-          <div class="prefix-char">&</div>
+          <div class="prefix-char">&amp;</div>
           <div class="prefix-name">Send to Cloud</div>
-          <div class="prefix-example">& Build the API</div>
+          <div class="prefix-example">&amp; Build the API</div>
         </div>
       </div>
     </section>
